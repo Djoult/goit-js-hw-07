@@ -19,9 +19,6 @@ gallery.innerHTML = galleryItems
 gallery.addEventListener("click", openGalleryImageModal);
 function openGalleryImageModal(event) {
   event.preventDefault();
-  //   if (event.target.nodeName !== "IMG") {
-  //     return;
-  //   }
   if (event.target == event.currentTarget) {
     return;
   }
@@ -38,6 +35,7 @@ function openGalleryImageModal(event) {
   instance.show();
   document.addEventListener("keydown", closeModal);
 }
+
 function closeModal(e) {
   e.preventDefault();
   if (e.key === "Escape") {
@@ -49,8 +47,6 @@ function closeModal(e) {
 
     setTimeout(() => {
       imageToClose.parentElement.removeChild(imageToClose);
-
-      return next();
     }, 410);
   }
 }
