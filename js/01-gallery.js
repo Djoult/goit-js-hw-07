@@ -26,27 +26,53 @@ function openGalleryImageModal(event) {
   const currentImg = event.target;
   console.log(currentImg);
   const currentLink = currentImg.dataset.source;
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
     
           <img width="1400" height="900" src="${currentLink}">
   
-  `);
+  `,
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", closeModal);
+      },
+      /*
+       * Function that gets executed before the lightbox closes.
+       * Returning false will prevent the lightbox from closing.
+       */
+      onClose: (instance) => {
+        document.removeEventListener("keydown", closeModal);
+      },
+    }
+  );
+  function closeModal(e) {
+    e.preventDefault();
+    if (e.key === "Escape") {
+      console.log("closed");
+      const imageToClose = document.querySelector(".basicLightbox--img");
+      // imageToClose.remove();
+      document.removeEventListener("keydown", closeModal);
+      imageToClose.classList.remove("basicLightbox--visible");
 
-  instance.show();
-  document.addEventListener("keydown", closeModal);
-}
-
-function closeModal(e) {
-  e.preventDefault();
-  if (e.key === "Escape") {
-    console.log("closed");
-    const imageToClose = document.querySelector(".basicLightbox--img");
-    // imageToClose.remove();
-    document.removeEventListener("keydown", closeModal);
-    imageToClose.classList.remove("basicLightbox--visible");
-
-    setTimeout(() => {
-      imageToClose.parentElement.removeChild(imageToClose);
-    }, 410);
+      setTimeout(() => {
+        imageToClose.parentElement.removeChild(imageToClose);
+      }, 410);
+    }
   }
+  instance.show();
 }
+
+// function closeModal(e) {
+//   e.preventDefault();
+//   if (e.key === "Escape") {
+//     console.log("closed");
+//     const imageToClose = document.querySelector(".basicLightbox--img");
+//     // imageToClose.remove();
+//     document.removeEventListener("keydown", closeModal);
+//     imageToClose.classList.remove("basicLightbox--visible");
+
+//     setTimeout(() => {
+//       imageToClose.parentElement.removeChild(imageToClose);
+//     }, 410);
+//   }
+// }
