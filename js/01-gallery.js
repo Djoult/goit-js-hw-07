@@ -43,20 +43,14 @@ function closeModal(e) {
   if (e.key === "Escape") {
     console.log("closed");
     const imageToClose = document.querySelector(".basicLightbox--img");
-    imageToClose.remove();
+    // imageToClose.remove();
     document.removeEventListener("keydown", closeModal);
-    // const close = function (elem, next) {
-    //   elem.classList.remove("basicLightbox--visible");
+    imageToClose.classList.remove("basicLightbox--visible");
 
-    //   setTimeout(() => {
-    //     if (visible(elem) === false) return next();
+    setTimeout(() => {
+      imageToClose.parentElement.removeChild(imageToClose);
 
-    //     elem.parentElement.removeChild(elem);
-
-    //     return next();
-    //   }, 410);
-
-    //   return true;
-    // };
+      return next();
+    }, 410);
   }
 }
