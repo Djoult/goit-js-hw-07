@@ -17,8 +17,9 @@ gallery.innerHTML = galleryItems
   </a>`
   )
   .join("");
-var lightbox = new SimpleLightbox(".gallery a", {
-  navText: ["&#11178;", "&#11179;"],
+const lightbox = new SimpleLightbox(".gallery a", {
+  // navText: ["&#11178;", "&#11179;"],
+  navText: ["&#8656;", "&#8658;"],
   captions: true,
   captionDelay: 250,
   captionSelector: "img",

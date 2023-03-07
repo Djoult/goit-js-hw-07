@@ -36,10 +36,6 @@ function openGalleryImageModal(event) {
       onShow: (instance) => {
         document.addEventListener("keydown", closeModal);
       },
-      /*
-       * Function that gets executed before the lightbox closes.
-       * Returning false will prevent the lightbox from closing.
-       */
       onClose: (instance) => {
         document.removeEventListener("keydown", closeModal);
       },
@@ -49,30 +45,8 @@ function openGalleryImageModal(event) {
     e.preventDefault();
     if (e.key === "Escape") {
       console.log("closed");
-      const imageToClose = document.querySelector(".basicLightbox--img");
-      // imageToClose.remove();
-      document.removeEventListener("keydown", closeModal);
-      imageToClose.classList.remove("basicLightbox--visible");
-
-      setTimeout(() => {
-        imageToClose.parentElement.removeChild(imageToClose);
-      }, 410);
+      instance.close();
     }
   }
   instance.show();
 }
-
-// function closeModal(e) {
-//   e.preventDefault();
-//   if (e.key === "Escape") {
-//     console.log("closed");
-//     const imageToClose = document.querySelector(".basicLightbox--img");
-//     // imageToClose.remove();
-//     document.removeEventListener("keydown", closeModal);
-//     imageToClose.classList.remove("basicLightbox--visible");
-
-//     setTimeout(() => {
-//       imageToClose.parentElement.removeChild(imageToClose);
-//     }, 410);
-//   }
-// }
